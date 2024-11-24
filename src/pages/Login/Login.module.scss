@@ -1,0 +1,186 @@
+@import '../../styles/variables.scss';
+
+.Login {
+    background-color: #fff;
+    padding: 120px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    font-family: $workSans-family;
+    width: 100%;
+
+}
+
+.logo {
+    height: auto;
+    max-width: 170px;
+}
+
+.InnerLogin {
+    display: flex;
+    flex-wrap: wrap; 
+    width: 100%;
+    align-items: center;
+}
+
+.LoginLeft {
+    width: 50%;
+    align-self: flex-end;
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.LoginRight {
+    width: 50%;
+    padding-left: 100px;
+
+    h2 {
+        color: $blue-color;
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 20px;
+        margin-bottom: 45px;
+        font-weight: 400;
+        color: $blue-text;
+    }
+
+    a {
+        font-size: 12px;
+        color: $green-color;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .EmailInput {
+            height: 50px;
+            width: 70%; 
+            padding-left: 10px;
+            color: $blue-text;
+            border: 2px solid rgba(84, 95, 125, 0.15);
+            border-radius: 5px;
+            font-size: 14px;
+            outline-color: $green-color;
+            
+        }
+
+        button {
+            height: 48px;
+            width: 70%;
+            margin-top: 6px;
+            background-color: $green-color;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: darken($green-color, 10%); // Add hover effect
+            }
+        }
+    }
+}
+
+.PasswordInput {
+    position: relative; // For positioning the 'Show' text inside the input field
+    width: 70%; // Match the width of the input fields
+    margin-bottom: 24px;
+  
+    input {
+      width: 100%;
+      height: 50px;
+      padding: 0 10px;
+      padding-right: 50px; // Add space for the "Show" text
+      color: #545F7D;
+      border: 2px solid rgba(84, 95, 125, 0.15);
+      border-radius: 5px;
+      font-size: 14px;
+      outline-color: $green-color;
+    }
+  
+    .TogglePassword {
+      position: absolute;
+      top: 50%;
+      right: 15px; // Align to the right inside the input
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: $green-color; // Use your preferred accent color
+      cursor: pointer;
+      user-select: none;
+  
+    }
+  }
+  
+
+@media only screen and (max-width: 600px) {
+
+    .Login {
+        padding: 32px 30px;
+        gap: 80px;
+    }
+    .LoginLeft {
+        display: none;
+    }
+
+    .LoginRight {
+        width: 100%;
+        padding-left: 0px;
+
+        h2 {
+            font-size: 34px;
+        }
+    
+        h3 {
+            font-size: 18px;
+            
+        }
+    
+        a {
+            font-size: 12px;
+        }
+
+        form {
+            gap: 20px;
+    
+            .EmailInput {
+                width: 100%;  
+                font-size: 12px;
+            }
+    
+            button {
+                width: 100%;
+                
+            }
+        }
+    }
+
+    .PasswordInput {
+        position: relative; // For positioning the 'Show' text inside the input field
+        width: 100%; // Match the width of the input fields
+        margin-bottom: 4px;
+
+        input { 
+            width: 100%;
+            font-size: 12px;
+        }
+      
+        .TogglePassword {
+            font-size: 12px;   
+          }
+        
+      }
+
+    
+}
+
