@@ -1,0 +1,66 @@
+@import '../../styles/variables.scss';
+
+header {
+    font-family: $workSans-family;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.leftHeader {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    
+}
+
+.headerInput {
+    width: 400px;
+    display: flex;
+    height: 40px;
+    
+
+    input {
+        height: 40px;
+        padding-left: 10px;
+        outline: none;
+        width: 85%;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-right:0px;
+        border: 2px solid rgba(84, 95, 125, 0.15);
+        font-weight: 400;
+        font-size: 14px;
+        color: $blue-text;
+    }
+    span {
+        width: 15%;
+        background-color: $green-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+}
+
+.rightHeader {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    color: $blue-color;
+
+    a {
+        text-decoration: none;
+        color: $blue-color;
+        text-decoration: underline;
+    }
+}
+
+
+.profileImg {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
