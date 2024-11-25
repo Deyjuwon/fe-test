@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import logo from '../../assets/logo.svg';
 import classes from '../Header/Header.module.scss'
 import { CiSearch } from "react-icons/ci";
-import bell from '../../assets/np_notification_2425223_000000 1.png'
-import profile from '../../assets/avatar.png'
-import dropdown from '../../assets/np_dropdown_615120_000000 1.png'
+import bell from '../../assets/np_notification_2425223_000000 1.png';
+import profile from '../../assets/avatar.png';
+import dropdown from '../../assets/np_dropdown_615120_000000 1.png';
 const Header = () => {
   return (
     <header className={classes.header}>
