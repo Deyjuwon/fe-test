@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from '../../assets/logo.svg';
 import signIn from '../../assets/pablo-sign-in 1.svg';
 import classes from '../Login/Login.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,6 +10,8 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className={classes.Login}>
@@ -38,7 +41,7 @@ const Login = () => {
               </span>
             </div>
             <a href="#forgotpassword">FORGOT PASSWORD?</a>
-            <button type="submit">LOG IN</button>
+            <button type="submit" onClick={() => navigate('/dashboard')}>LOG IN</button>
           </form>
         </div>
       </div>

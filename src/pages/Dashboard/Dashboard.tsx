@@ -70,6 +70,22 @@ const Dashboard: React.FC = () => {
     { icon: icon4, label: 'USERS WITH SAVINGS', value: '102,453' },
   ];
 
+  // Function to get the CSS class for the status
+  const getStatusClass = (status: string) => {
+    switch (status.toLowerCase()) {
+      case 'active':
+        return classes.statusActive;
+      case 'blacklisted':
+        return classes.statusBlacklisted;
+      case 'inactive':
+        return classes.statusInactive;
+      case 'pending':
+        return classes.statusPending;
+      default:
+        return '';
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -100,44 +116,46 @@ const Dashboard: React.FC = () => {
             <p>Loading data...</p>
           ) : (
             <table className={classes.userTable}>
+              <thead>
                 <tr>
-                  <td>
+                  <th>
                     <div className={classes.headerWithFilter}>
                       ORGANIZATION
                       <img src={filter} alt="filter-icon" className={classes.filterIcon} />
                     </div>
-                  </td>
-                  <td>
+                  </th>
+                  <th>
                     <div className={classes.headerWithFilter}>
                       USERNAME
                       <img src={filter} alt="filter-icon" className={classes.filterIcon} />
                     </div>
-                  </td>
-                  <td>
+                  </th>
+                  <th>
                     <div className={classes.headerWithFilter}>
                       EMAIL
                       <img src={filter} alt="filter-icon" className={classes.filterIcon} />
                     </div>
-                  </td>
-                  <td>
+                  </th>
+                  <th>
                     <div className={classes.headerWithFilter}>
                       PHONE NUMBER
                       <img src={filter} alt="filter-icon" className={classes.filterIcon} />
                     </div>
-                  </td>
-                  <td>
+                  </th>
+                  <th>
                     <div className={classes.headerWithFilter}>
                       DATE JOINED
                       <img src={filter} alt="filter-icon" className={classes.filterIcon} />
                     </div>
-                  </td>
-                  <td>
+                  </th>
+                  <th>
                     <div className={classes.headerWithFilter}>
                       STATUS
                       <img src={filter} alt="filter-icon" className={classes.filterIcon} />
                     </div>
-                  </td>
+                  </th>
                 </tr>
+              </thead>
               <tbody>
                 {userData.map((user, index) => (
                   <tr key={index}>
@@ -146,7 +164,9 @@ const Dashboard: React.FC = () => {
                     <td>{user.email}</td>
                     <td>{user.phoneNumber}</td>
                     <td>{user.dateJoined}</td>
-                    <td>{user.status}</td>
+                    <td>
+                      <span className={getStatusClass(user.status)}>{user.status}</span>
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -120,6 +120,10 @@ aside {
         font-weight: 400;
         padding:20px 0px;
     }
+
+    th {
+        padding-bottom: 30px;
+    }
 }
 
   
@@ -138,3 +142,34 @@ aside {
     height: 12px;
     cursor: pointer;
   }
+
+  .statusActive {
+    color: #39CD62;
+    background-color: rgba(#39CD62, 0.1);
+    padding: 10px;
+    border-radius: 50px;
+  }
+  
+  .statusBlacklisted {
+    color: #E4033B;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: rgba(#E4033B, 0.1);
+ 
+  }
+  
+  .statusInactive {
+    background-color: rgba($blue-color, 0.1);
+    color: $blue-color;
+    padding: 10px;
+    border-radius: 50px;
+  }
+  
+  .statusPending {
+    color: #E9B200;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: rgba(#E9B200, 0.1);
+    
+  }
+  
