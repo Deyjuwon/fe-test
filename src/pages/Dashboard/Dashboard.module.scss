@@ -57,10 +57,84 @@ aside {
     background-color: #213F7D0F;
     padding: 60px 30px 60px 40px;
     color: $blue-color;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
 
     h1 {
         font-weight: 500;
+        padding-bottom: 10px;
+        font-size: 24px;
     }
 }
 
+.userBoxContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userBox {
+    height: 160px;
+    width: 240px;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+    
+
+    img {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+}
+
+.userTable {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+
+    // tr {
+    //     display: flex;
+    //     justify-content: space-between;
+        
+    // }
+
+
+    td {
+        font-size: 14px;
+        font-weight: 400;
+        padding:20px 0px;
+    }
+}
+
+  
+.headerWithFilter {
+      display: flex;
+      align-items: center;
+      ;
+      gap: 18px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  
+  
+  .filterIcon {
+    width: 12px; // Adjust size as needed
+    height: 12px;
+    cursor: pointer;
+  }
