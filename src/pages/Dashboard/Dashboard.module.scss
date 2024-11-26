@@ -113,6 +113,7 @@ aside {
     //     justify-content: space-between;
         
     // }
+    position: relative;
 
 
     td {
@@ -123,6 +124,10 @@ aside {
 
     th {
         padding-bottom: 30px;
+    }
+
+    tbody {
+        position: relative;
     }
 }
 
@@ -172,4 +177,58 @@ aside {
     background-color: rgba(#E9B200, 0.1);
     
   }
-  
+
+.paginationContainer {
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+    color: rgba($blue-color, 0.7);
+}
+
+.paginationLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    select {
+        height: 30px;
+        width: 80px;
+        background-color: rgba($blue-color, 0.1);
+        color: $blue-color;
+        border-radius: 5px;
+    }
+}
+
+.paginationRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+
+    img {
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 5px;
+        background-color: rgba($blue-color, 0.1);
+    }
+
+    p {
+        cursor: pointer;
+    }
+
+    .active {
+        font-weight: 700;
+    }
+}
+
+.statusField {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+    img {
+        cursor: pointer;
+    }
+}

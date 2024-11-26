@@ -9,7 +9,10 @@ import icon2 from '../../assets/icon (2).png';
 import icon3 from '../../assets/icon (3).png';
 import icon4 from '../../assets/icon (4).png';
 import filter from '../../assets/filter-results-button.png';
-
+import rightArrow from '../../assets/np_next_2236826_000000 1.png';
+import leftArrow from '../../assets/np_next_2236826_000000 2 (1).png';
+import details from '../../assets/ic-more-vert-18px.png'
+import DetailModal from '../../components/Modal/DetailModal';
 // Type for User Stats
 interface UserStat {
   icon: string;
@@ -30,6 +33,37 @@ interface User {
 const Dashboard: React.FC = () => {
   const [userData, setUserData] = useState<User[]>([]); // State to store user data
   const [isLoading, setIsLoading] = useState<boolean>(true); // State for loading status
+  const [itemsPerPage, setItemsPerPage] = useState<number>(10); // Default is 10
+  const [currentPage, setCurrentPage] = useState<number>(1); // State to track current page
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // Modal visibility state
+  const [selectedUser, setSelectedUser] = useState<User | null>(null); // State to track selected user
+
+  // Handle opening the modal
+  const handleOpenModal = (user: User) => {
+    setSelectedUser(user); // Set the clicked user as selected
+    setIsModalOpen(true);
+  };
+
+  // Handle closing the modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedUser(null);
+  };
+
+  // // Handle change in dropdown selection
+  // const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setItemsPerPage(Number(event.target.value)); // Update the state with the selected value
+  //   setCurrentPage(1); // Reset to the first page when items per page changes
+  // };
+
+  // Handle pagination
+  const handlePagination = (direction: 'next' | 'prev') => {
+    if (direction === 'next') {
+      setCurrentPage(prevPage => prevPage + 1);
+    } else if (direction === 'prev' && currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
 
   // Fetch data from the Mocky API
   useEffect(() => {
@@ -85,6 +119,12 @@ const Dashboard: React.FC = () => {
         return '';
     }
   };
+
+  // Get current page data slice
+  const currentPageData = userData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div>
@@ -157,21 +197,62 @@ const Dashboard: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {userData.map((user, index) => (
+                {currentPageData.map((user, index) => (
                   <tr key={index}>
                     <td>{user.organization}</td>
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.phoneNumber}</td>
                     <td>{user.dateJoined}</td>
-                    <td>
+                    <td className={classes.statusField}>
                       <span className={getStatusClass(user.status)}>{user.status}</span>
+                      <span>
+                        <img
+                          src={details}
+                          alt="Details"
+                          onClick={() => handleOpenModal(user)} // Open modal on click
+                          style={{ cursor: 'pointer' }}
+                        />
+                        
+                      </span>
                     </td>
+
                   </tr>
                 ))}
               </tbody>
+              {/* Detail Modal
+              {isModalOpen && (
+                          <DetailModal 
+                            user={selectedUser} 
+                            onClose={handleCloseModal} 
+                          />
+                )} */}
             </table>
           )}
+
+          {/* Pagination */}
+          <div className={classes.paginationContainer}>
+            <div className={classes.paginationLeft}>
+              <p>Showing {currentPageData.length} of {userData.length}</p>
+            </div>
+            <div className={classes.paginationRight}>
+              <img
+                src={leftArrow}
+                alt="previous-page"
+                onClick={() => handlePagination('prev')}
+                style={{ cursor: currentPage > 1 ? 'pointer' : 'not-allowed' }}
+              />
+              <p className={classes.active}>{currentPage}</p>
+              <img
+                src={rightArrow}
+                alt="next-page"
+                onClick={() => handlePagination('next')}
+                style={{ cursor: currentPage * itemsPerPage < userData.length ? 'pointer' : 'not-allowed' }}
+              />
+            </div>
+          </div>
+
+          
         </div>
       </div>
     </div>
