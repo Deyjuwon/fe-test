@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
 import classes from './Dashboard.module.scss';
-import drop from '../../assets/np_next_2236826_000000 2.png';
-import { MenuSection } from './types';
-import { menuData, customersData, businessData, settingsData } from './menuData';
 import icon1 from '../../assets/icon (1).png';
 import icon2 from '../../assets/icon (2).png';
 import icon3 from '../../assets/icon (3).png';
@@ -11,16 +9,14 @@ import icon4 from '../../assets/icon (4).png';
 import filter from '../../assets/filter-results-button.png';
 import rightArrow from '../../assets/np_next_2236826_000000 1.png';
 import leftArrow from '../../assets/np_next_2236826_000000 2 (1).png';
-import details from '../../assets/ic-more-vert-18px.png'
-import DetailModal from '../../components/Modal/DetailModal';
-// Type for User Stats
+import details from '../../assets/ic-more-vert-18px.png';
+
 interface UserStat {
   icon: string;
   label: string;
   value: string | number;
 }
 
-// Type for User Data fetched from Mocky API
 interface User {
   organization: string;
   username: string;
@@ -31,41 +27,11 @@ interface User {
 }
 
 const Dashboard: React.FC = () => {
-  const [userData, setUserData] = useState<User[]>([]); // State to store user data
-  const [isLoading, setIsLoading] = useState<boolean>(true); // State for loading status
-  const [itemsPerPage, setItemsPerPage] = useState<number>(10); // Default is 10
-  const [currentPage, setCurrentPage] = useState<number>(1); // State to track current page
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // Modal visibility state
-  const [selectedUser, setSelectedUser] = useState<User | null>(null); // State to track selected user
+  const [userData, setUserData] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  // Handle opening the modal
-  const handleOpenModal = (user: User) => {
-    setSelectedUser(user); // Set the clicked user as selected
-    setIsModalOpen(true);
-  };
-
-  // Handle closing the modal
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedUser(null);
-  };
-
-  // // Handle change in dropdown selection
-  // const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setItemsPerPage(Number(event.target.value)); // Update the state with the selected value
-  //   setCurrentPage(1); // Reset to the first page when items per page changes
-  // };
-
-  // Handle pagination
-  const handlePagination = (direction: 'next' | 'prev') => {
-    if (direction === 'next') {
-      setCurrentPage(prevPage => prevPage + 1);
-    } else if (direction === 'prev' && currentPage > 1) {
-      setCurrentPage(prevPage => prevPage - 1);
-    }
-  };
-
-  // Fetch data from the Mocky API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -82,21 +48,6 @@ const Dashboard: React.FC = () => {
     fetchData();
   }, []);
 
-  // Reusable function to render a menu section
-  const renderMenuSection = (title: string | null, items: MenuSection[]) => (
-    <div>
-      {title && <p className={classes.asideHeader}>{title}</p>}
-      {items.map((item, index) => (
-        <span key={index}>
-          <img src={item.icon} alt={item.label} />
-          <p>{item.label}</p>
-          {item.hasDropdown && <img src={drop} alt="dropdown-icon" />}
-        </span>
-      ))}
-    </div>
-  );
-
-  // User statistics data
   const userStats: UserStat[] = [
     { icon: icon1, label: 'USERS', value: '2453' },
     { icon: icon2, label: 'ACTIVE USERS', value: '2,453' },
@@ -104,7 +55,6 @@ const Dashboard: React.FC = () => {
     { icon: icon4, label: 'USERS WITH SAVINGS', value: '102,453' },
   ];
 
-  // Function to get the CSS class for the status
   const getStatusClass = (status: string) => {
     switch (status.toLowerCase()) {
       case 'active':
@@ -120,7 +70,14 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  // Get current page data slice
+  const handlePagination = (direction: 'next' | 'prev') => {
+    if (direction === 'next') {
+      setCurrentPage(prevPage => prevPage + 1);
+    } else if (direction === 'prev' && currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
+
   const currentPageData = userData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -130,13 +87,8 @@ const Dashboard: React.FC = () => {
     <div>
       <Header />
       <div className={classes.Dashboard}>
-        {/* Sidebar */}
-        <aside className={classes.aside}>
-          {renderMenuSection(null, menuData)}
-          {renderMenuSection('CUSTOMERS', customersData)}
-          {renderMenuSection('BUSINESSES', businessData)}
-          {renderMenuSection('SETTINGS', settingsData)}
-        </aside>
+        {/* Sidebar Component */}
+        <Sidebar />
 
         {/* Right Dashboard */}
         <div className={classes.rightDashboard}>
@@ -151,7 +103,6 @@ const Dashboard: React.FC = () => {
             ))}
           </div>
 
-          {/* User Table */}
           {isLoading ? (
             <p>Loading data...</p>
           ) : (
@@ -161,37 +112,37 @@ const Dashboard: React.FC = () => {
                   <th>
                     <div className={classes.headerWithFilter}>
                       ORGANIZATION
-                      <img src={filter} alt="filter-icon" className={classes.filterIcon} />
+                      <img src={filter} alt="filter-icon" />
                     </div>
                   </th>
                   <th>
                     <div className={classes.headerWithFilter}>
                       USERNAME
-                      <img src={filter} alt="filter-icon" className={classes.filterIcon} />
+                      <img src={filter} alt="filter-icon" />
                     </div>
                   </th>
                   <th>
                     <div className={classes.headerWithFilter}>
                       EMAIL
-                      <img src={filter} alt="filter-icon" className={classes.filterIcon} />
+                      <img src={filter} alt="filter-icon" />
                     </div>
                   </th>
                   <th>
                     <div className={classes.headerWithFilter}>
                       PHONE NUMBER
-                      <img src={filter} alt="filter-icon" className={classes.filterIcon} />
+                      <img src={filter} alt="filter-icon" />
                     </div>
                   </th>
                   <th>
                     <div className={classes.headerWithFilter}>
                       DATE JOINED
-                      <img src={filter} alt="filter-icon" className={classes.filterIcon} />
+                      <img src={filter} alt="filter-icon" />
                     </div>
                   </th>
                   <th>
                     <div className={classes.headerWithFilter}>
                       STATUS
-                      <img src={filter} alt="filter-icon" className={classes.filterIcon} />
+                      <img src={filter} alt="filter-icon" />
                     </div>
                   </th>
                 </tr>
@@ -207,33 +158,20 @@ const Dashboard: React.FC = () => {
                     <td className={classes.statusField}>
                       <span className={getStatusClass(user.status)}>{user.status}</span>
                       <span>
-                        <img
-                          src={details}
-                          alt="Details"
-                          onClick={() => handleOpenModal(user)} // Open modal on click
-                          style={{ cursor: 'pointer' }}
-                        />
-                        
+                        <img src={details} alt="Details" />
                       </span>
                     </td>
-
                   </tr>
                 ))}
               </tbody>
-              {/* Detail Modal
-              {isModalOpen && (
-                          <DetailModal 
-                            user={selectedUser} 
-                            onClose={handleCloseModal} 
-                          />
-                )} */}
             </table>
           )}
 
-          {/* Pagination */}
           <div className={classes.paginationContainer}>
             <div className={classes.paginationLeft}>
-              <p>Showing {currentPageData.length} of {userData.length}</p>
+              <p>
+                Showing {currentPageData.length} of {userData.length}
+              </p>
             </div>
             <div className={classes.paginationRight}>
               <img
@@ -251,8 +189,6 @@ const Dashboard: React.FC = () => {
               />
             </div>
           </div>
-
-          
         </div>
       </div>
     </div>
