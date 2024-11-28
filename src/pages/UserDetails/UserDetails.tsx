@@ -102,40 +102,37 @@ const UserDetails = () => {
                         </div>
                     </div>
                 </div>
+                <hr />
                 <div className={classes.userInfoPersonal}>
                     <p>Education and Employment</p>
                     <div className={classes.userInfoPersonalDetail}>
                         <div>
-                            <p>level of education</p>
+                            <p>LEVEL OF EDUCATION</p>
                             <p>B.Sc</p>
                         </div>
                         <div>
-                            <p>employment status</p>
+                            <p>EMPLOYMENT STATUS</p>
                             <p>Employed</p>
                         </div>
                         <div>
-                            <p></p>
-                            <p></p>
+                            <p>SECTOR OF EMPLOYMENT</p>
+                            <p>FinTech</p>
                         </div>
                         <div>
-                            <p></p>
-                            <p></p>
+                            <p>DURATION OF EMPLOYMENT</p>
+                            <p>2 years</p>
                         </div>
                         <div>
-                            <p></p>
-                            <p></p>
+                            <p>OFFICE EMAIL</p>
+                            <p>grace@lendsqr.com</p>
                         </div>
                         <div>
-                            <p></p>
-                            <p></p>
+                            <p>MONTHLY INCOME</p>
+                            <p>₦200,000.00 - ₦400,000.00</p>
                         </div>
                         <div>
-                            <p></p>
-                            <p></p>
-                        </div>
-                        <div>
-                            <p></p>
-                            <p></p>
+                            <p>LOAN REPAYMENT</p>
+                            <p>40,000</p>
                         </div>
                     </div>
 
@@ -143,13 +140,39 @@ const UserDetails = () => {
                 <div className={classes.userInfoPersonal}>
                     <p>Socials</p>
                     <div className={classes.userInfoPersonalDetail}>
-
+                        <div>
+                            <p>TWITTER</p>
+                            <p>@grace_effiom</p>
+                        </div>
+                        <div>
+                            <p>FACEBOOK</p>
+                            <p>Grace Effiom</p>
+                        </div>
+                        <div>
+                            <p>INSTAGRAM</p>
+                            <p>@grace_effiom</p>
+                        </div>
                     </div>
                 </div>
                 <div className={classes.userInfoPersonal}>
                     <p>Guarantor</p>
                     <div className={classes.userInfoPersonalDetail}>
-
+                        <div>
+                            <p>FULL NAME</p>
+                            <p>Debby Ogana</p>
+                        </div>
+                        <div>
+                            <p>PHONE NUMBER</p>
+                            <p>07060780922</p>
+                        </div>
+                        <div>
+                            <p>EMAIL ADDRESS</p>
+                            <p>debby@gmail.com</p>
+                        </div>
+                        <div>
+                            <p>RELATIONSHIP</p>
+                            <p>Sister</p>
+                        </div>
                     </div>
                 </div>
             </div>
