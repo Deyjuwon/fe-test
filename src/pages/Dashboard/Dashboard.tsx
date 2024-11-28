@@ -35,9 +35,17 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(process.env.REACT_APP_MOCK_API_URL || '');
-        const data = await response.json();
-        setUserData(data);
+        // Check if data already exists in localStorage
+        const storedData = localStorage.getItem('userData');
+        if (storedData) {
+          setUserData(JSON.parse(storedData)); // Set state from localStorage
+        } else {
+          // Fetch data from the API if not in localStorage
+          const response = await fetch(process.env.REACT_APP_MOCK_API_URL || '');
+          const data = await response.json();
+          setUserData(data); // Set state from API
+          localStorage.setItem('userData', JSON.stringify(data)); // Save to localStorage
+        }
       } catch (error) {
         console.error('Error fetching user data:', error);
       } finally {
