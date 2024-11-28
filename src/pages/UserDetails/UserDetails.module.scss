@@ -17,3 +17,235 @@
     flex-direction: column;
     gap: 20px;
 }
+
+.backIcon {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+    p {
+        font-size: 16px;
+        font-weight: 400;
+        
+    }
+
+}
+
+.userDetailsHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.userDetailsHeadingRight {
+    display: flex;
+    gap: 10px;
+
+
+    p {
+        height: 40px;
+        width: 170px;
+       
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 600;
+       
+    }
+
+    .blacklist {
+        border: 1px solid #E4033B;
+        color: #E4033B;
+    }
+    .activate {
+        border: 1px solid #39CDCC;
+        color: #39CDCC;
+    }
+
+}
+
+.userProfileHeader {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 30px 20px 0px 20px;
+    gap: 50px;
+    justify-content: space-between;
+
+}
+
+.userProfileHeaderTop {
+    
+    display: flex;
+    gap: 30px;
+    align-items: center;
+
+    .line {
+        height: 80px;
+        width: 2px;
+        border: 1px solid rgba(#213F7D,  0.2) ;
+    }
+
+
+    .userProfileHeader1 {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding-right: 25px;
+
+        .userProfileHeaderImg {
+            height: 100px;
+            width: 100px;
+            background-color: rgba(#213F7D,  0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+        }
+
+        .userProfileName {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            
+
+            p:nth-child(1) {
+                font-size: 22px;
+                font-weight: 600;
+               
+            }
+            p:nth-child(2) {
+                font-size: 14px;
+                font-weight: 400;
+                color: $blue-text;
+            }
+        }
+
+        
+    }
+
+    .userProfileHeader2 {
+        display: flex;
+        gap: 15px;
+        
+        padding-right: 25px;
+        flex-direction: column;
+
+        p {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        div {
+            display: flex;
+            gap: 5px;
+            
+        }
+    }
+
+    .userProfileHeader3 {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        p:nth-child(1) {
+            font-size: 22px;
+            color: $blue-color;
+            font-weight: 500;
+        }
+
+        p:nth-child(2) {
+            font-size: 12px;
+            color: $blue-color;
+            font-weight: 400;
+        }
+    }
+
+
+}
+
+.userProfileHeaderBottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 400;
+    color: #222;
+    
+
+    p {
+        padding-bottom: 10px;
+        cursor: pointer;
+        
+        &:hover {
+            color: $green-color;
+        border-bottom: 2px solid $green-color;
+        }
+    }
+
+    p:nth-child(1) {
+        color: $green-color;
+        border-bottom: 2px solid $green-color;
+    }
+}
+
+
+.userProfileInfo {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 30px 20px 0px 20px;
+    gap: 50px;
+    justify-content: space-between;
+
+
+    .userInfoPersonal {
+        display: flex;
+        gap: 25px;
+        flex-direction: column;
+
+        p:nth-child(1) {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .userInfoPersonalDetail {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            gap: 30px;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                // padding-right: 100px;
+                // padding-bottom: 50px;
+
+                p:nth-child(1) {
+
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: $blue-text;
+                }
+
+                p:nth-child(2) {
+
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: $blue-text;
+                }
+
+            }
+            
+        }
+    }
+
+
+
+
+    
+
+}
+
