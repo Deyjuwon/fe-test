@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import classes from './Dashboard.module.scss';
@@ -18,6 +19,7 @@ interface UserStat {
 }
 
 interface User {
+  id: string; // Unique ID
   organization: string;
   username: string;
   email: string;
@@ -32,20 +34,18 @@ const Dashboard: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  const navigate = useNavigate();
+
+  const handleNameClick = (id: string) => {
+    navigate(`/user/${id}`); // Ensure the ID is passed as a route parameter
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Check if data already exists in localStorage
-        const storedData = localStorage.getItem('userData');
-        if (storedData) {
-          setUserData(JSON.parse(storedData)); // Set state from localStorage
-        } else {
-          // Fetch data from the API if not in localStorage
-          const response = await fetch(process.env.REACT_APP_MOCK_API_URL || '');
-          const data = await response.json();
-          setUserData(data); // Set state from API
-          localStorage.setItem('userData', JSON.stringify(data)); // Save to localStorage
-        }
+        const response = await fetch(process.env.REACT_APP_MOCK_API_URL || '');
+        const data = await response.json();
+        setUserData(data); // Update the state with fetched data
       } catch (error) {
         console.error('Error fetching user data:', error);
       } finally {
@@ -80,9 +80,9 @@ const Dashboard: React.FC = () => {
 
   const handlePagination = (direction: 'next' | 'prev') => {
     if (direction === 'next') {
-      setCurrentPage(prevPage => prevPage + 1);
+      setCurrentPage((prevPage) => prevPage + 1);
     } else if (direction === 'prev' && currentPage > 1) {
-      setCurrentPage(prevPage => prevPage - 1);
+      setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
@@ -95,10 +95,8 @@ const Dashboard: React.FC = () => {
     <div>
       <Header />
       <div className={classes.Dashboard}>
-        {/* Sidebar Component */}
         <Sidebar />
 
-        {/* Right Dashboard */}
         <div className={classes.rightDashboard}>
           <h1>Users</h1>
           <div className={classes.userBoxContainer}>
@@ -117,49 +115,26 @@ const Dashboard: React.FC = () => {
             <table className={classes.userTable}>
               <thead>
                 <tr>
-                  <th>
-                    <div className={classes.headerWithFilter}>
-                      ORGANIZATION
-                      <img src={filter} alt="filter-icon" />
-                    </div>
-                  </th>
-                  <th>
-                    <div className={classes.headerWithFilter}>
-                      USERNAME
-                      <img src={filter} alt="filter-icon" />
-                    </div>
-                  </th>
-                  <th>
-                    <div className={classes.headerWithFilter}>
-                      EMAIL
-                      <img src={filter} alt="filter-icon" />
-                    </div>
-                  </th>
-                  <th>
-                    <div className={classes.headerWithFilter}>
-                      PHONE NUMBER
-                      <img src={filter} alt="filter-icon" />
-                    </div>
-                  </th>
-                  <th>
-                    <div className={classes.headerWithFilter}>
-                      DATE JOINED
-                      <img src={filter} alt="filter-icon" />
-                    </div>
-                  </th>
-                  <th>
-                    <div className={classes.headerWithFilter}>
-                      STATUS
-                      <img src={filter} alt="filter-icon" />
-                    </div>
-                  </th>
+                  {['ORGANIZATION', 'USERNAME', 'EMAIL', 'PHONE NUMBER', 'DATE JOINED', 'STATUS'].map((header) => (
+                    <th key={header}>
+                      <div className={classes.headerWithFilter}>
+                        {header}
+                        <img src={filter} alt="filter-icon" />
+                      </div>
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {currentPageData.map((user, index) => (
-                  <tr key={index}>
+                {currentPageData.map((user) => (
+                  <tr key={user.id}>
                     <td>{user.organization}</td>
-                    <td>{user.username}</td>
+                    <td
+                      style={{ cursor: 'pointer', color: 'blue' }}
+                      onClick={() => handleNameClick(user.id)}
+                    >
+                      {user.username}
+                    </td>
                     <td>{user.email}</td>
                     <td>{user.phoneNumber}</td>
                     <td>{user.dateJoined}</td>
@@ -193,7 +168,9 @@ const Dashboard: React.FC = () => {
                 src={rightArrow}
                 alt="next-page"
                 onClick={() => handlePagination('next')}
-                style={{ cursor: currentPage * itemsPerPage < userData.length ? 'pointer' : 'not-allowed' }}
+                style={{
+                  cursor: currentPage * itemsPerPage < userData.length ? 'pointer' : 'not-allowed',
+                }}
               />
             </div>
           </div>

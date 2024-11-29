@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import classes from './UserDetails.module.scss'
@@ -7,7 +8,73 @@ import profile from '../../assets/np_user_948637_000000 1.png'
 import star1 from '../../assets/np_star_1208084_000000 1.png';
 import star2 from '../../assets/np_star_1171151_000000 2.png';
 
-const UserDetails = () => {
+interface User {
+    id: number;
+    organization: string;
+    username: string;
+    email: string;
+    phoneNumber: string;
+    dateJoined: string;
+    status: string;
+
+    fullName?: string;
+    bvn?: string;
+    gender?: string;
+    maritalStatus?: string;
+    noOfChildren?: string;
+    apartmentType?: string;
+    levelOfEducation?: string;
+    employmentStatus?: string;
+    sectorOfEmployment?: string;
+    durationOfEmployment?: string;
+    officeEmail?: string;
+    monthlyIncome?: string;
+    loanRepayment?: string;
+    twitter?: string;
+    facebook?: string;
+    instagram?: string;
+    guarantorFullName?: string;
+    guarantorEmail?: string;
+    guarantorRelationship?: string;
+    guarantorNumber?: string; 
+    
+  }
+  
+
+  
+
+const UserDetails: React.FC = () => {
+    const { id } = useParams<{ id: string }>(); // id is always a string from the route
+    const [user, setUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+          try {
+            const response = await fetch(process.env.REACT_APP_MOCK_API_URL || '');
+            const data: User[] = await response.json();
+    
+            console.log('API Data:', data); // Debug: Log the API response
+    
+            // Convert id from route (string) to number for comparison
+            const selectedUser = data.find((user) => user.id === Number(id));
+            setUser(selectedUser || null);
+          } catch (error) {
+            console.error('Error fetching user details:', error);
+          } finally {
+            setIsLoading(false);
+          }
+        };
+    
+        console.log('Route ID:', id); // Debug: Log the route parameter
+        fetchUserDetails();
+      }, [id]);
+
+    
+      if (isLoading) return <p>Loading user details...</p>;
+      if (!user) return <p>User not found!</p>;
+    
+
   return (
     <div className={classes.userDetailsContainer}>
       <Header />
@@ -33,7 +100,7 @@ const UserDetails = () => {
                     <div className={classes.userProfileHeader1}>
                         <div className={classes.userProfileHeaderImg}><img src={profile} alt="" /></div>
                         <div className={classes.userProfileName }>
-                            <p>Grace Effiom</p>
+                            <p>{user.username}</p>
                             <p>LSQFf587g90</p>
                         </div>
                         </div>
@@ -70,35 +137,35 @@ const UserDetails = () => {
                     <div className={classes.userInfoPersonalDetail}>
                         <div>
                             <p>FULL NAME</p>
-                            <p>Grace Effiom</p>
+                            <p>{user.username}</p>
                         </div>
                         <div>
                             <p>PHONE NUMBER</p>
-                            <p>07060780922</p>
+                            <p>{user.phoneNumber}</p>
                         </div>
                         <div>
                             <p>EMAIL ADDRESS</p>
-                            <p>grace@gmail.com</p>
+                            <p>{user.email}</p>
                         </div>
                         <div>
                             <p>BVN</p>
-                            <p>07060780922</p>
+                            <p>{user.bvn}</p>
                         </div>
                         <div>
                             <p>GENDER</p>
-                            <p>Female</p>
+                            <p>{user.gender}</p>
                         </div>
                         <div>
                             <p>MARITAL STATUS</p>
-                            <p>Single</p>
+                            <p>{user.maritalStatus}</p>
                         </div>
                         <div>
                             <p>CHILDREN</p>
-                            <p>None</p>
+                            <p>{user.noOfChildren}</p>
                         </div>
                         <div>
                             <p>TYPE OF RESIDENT</p>
-                            <p>Parent’s Apartment</p>
+                            <p>{user.apartmentType}</p>
                         </div>
                     </div>
                 </div>
@@ -108,31 +175,31 @@ const UserDetails = () => {
                     <div className={classes.userInfoPersonalDetail}>
                         <div>
                             <p>LEVEL OF EDUCATION</p>
-                            <p>B.Sc</p>
+                            <p>{user.levelOfEducation}</p>
                         </div>
                         <div>
                             <p>EMPLOYMENT STATUS</p>
-                            <p>Employed</p>
+                            <p>{user.employmentStatus}</p>
                         </div>
                         <div>
                             <p>SECTOR OF EMPLOYMENT</p>
-                            <p>FinTech</p>
+                            <p>{user.sectorOfEmployment}</p>
                         </div>
                         <div>
                             <p>DURATION OF EMPLOYMENT</p>
-                            <p>2 years</p>
+                            <p>{user.durationOfEmployment}</p>
                         </div>
                         <div>
                             <p>OFFICE EMAIL</p>
-                            <p>grace@lendsqr.com</p>
+                            <p>{user.officeEmail}</p>
                         </div>
                         <div>
                             <p>MONTHLY INCOME</p>
-                            <p>₦200,000.00 - ₦400,000.00</p>
+                            <p>{user.monthlyIncome}</p>
                         </div>
                         <div>
                             <p>LOAN REPAYMENT</p>
-                            <p>40,000</p>
+                            <p>{user.loanRepayment}</p>
                         </div>
                     </div>
 
@@ -142,15 +209,15 @@ const UserDetails = () => {
                     <div className={classes.userInfoPersonalDetail}>
                         <div>
                             <p>TWITTER</p>
-                            <p>@grace_effiom</p>
+                            <p>{user.twitter}</p>
                         </div>
                         <div>
                             <p>FACEBOOK</p>
-                            <p>Grace Effiom</p>
+                            <p>{user.facebook}</p>
                         </div>
                         <div>
                             <p>INSTAGRAM</p>
-                            <p>@grace_effiom</p>
+                            <p>{user.instagram}</p>
                         </div>
                     </div>
                 </div>
@@ -159,19 +226,19 @@ const UserDetails = () => {
                     <div className={classes.userInfoPersonalDetail}>
                         <div>
                             <p>FULL NAME</p>
-                            <p>Debby Ogana</p>
+                            <p>{user.guarantorFullName}</p>
                         </div>
                         <div>
                             <p>PHONE NUMBER</p>
-                            <p>07060780922</p>
+                            <p>{user.guarantorNumber}</p>
                         </div>
                         <div>
                             <p>EMAIL ADDRESS</p>
-                            <p>debby@gmail.com</p>
+                            <p>{user.guarantorEmail}</p>
                         </div>
                         <div>
                             <p>RELATIONSHIP</p>
-                            <p>Sister</p>
+                            <p>{user.guarantorRelationship}</p>
                         </div>
                     </div>
                 </div>
