@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../components/Header/Header'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import classes from './UserDetails.module.scss'
@@ -7,7 +7,6 @@ import back from '../../assets/np_back_3007750_000000 1.png'
 import profile from '../../assets/np_user_948637_000000 1.png'
 import star1 from '../../assets/np_star_1208084_000000 1.png';
 import star2 from '../../assets/np_star_1171151_000000 2.png';
-
 interface User {
     id: number;
     organization: string;
@@ -47,6 +46,12 @@ const UserDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>(); // id is always a string from the route
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const navigate = useNavigate();
+
+    // Navigate back to the user list
+    const handleBack = () => {
+        navigate('/dashboard');
+    };
 
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -82,7 +87,7 @@ const UserDetails: React.FC = () => {
         <Sidebar />
 
         <div className={classes.userDetailsRight}>
-            <div className={classes.backIcon}>
+            <div className={classes.backIcon} onClick={handleBack}>
                 <img src={back} alt="" />
                 <p>Back to Users</p>
             </div>
