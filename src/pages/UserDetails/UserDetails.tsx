@@ -7,6 +7,7 @@ import back from '../../assets/np_back_3007750_000000 1.png'
 import profile from '../../assets/np_user_948637_000000 1.png'
 import star1 from '../../assets/np_star_1208084_000000 1.png';
 import star2 from '../../assets/np_star_1171151_000000 2.png';
+import Spinner from '../../components/Spinner/Spinner';
 interface User {
     id: number;
     organization: string;
@@ -76,7 +77,7 @@ const UserDetails: React.FC = () => {
       }, [id]);
 
     
-      if (isLoading) return <p>Loading user details...</p>;
+      if (isLoading) return <Spinner />;
       if (!user) return <p>User not found!</p>;
     
 
@@ -250,7 +251,8 @@ const UserDetails: React.FC = () => {
             </div>
                 
         </div>
-
+        
+        
        
       </div>
     </div>

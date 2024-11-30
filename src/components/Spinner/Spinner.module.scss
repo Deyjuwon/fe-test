@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8rem; 
+    margin: auto;
+    height: 100vh;
+  
+    .spinner {
+      animation: spin 1s linear infinite;
+      border-radius: 50%;
+      height: 2.5rem; 
+      width: 2.5rem; 
+      border-top: 4px solid $green-color;
+      border-right: 4px solid transparent; 
+    }
+  }
+  
+  // Keyframes for spinning animation
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
