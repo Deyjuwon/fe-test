@@ -60,10 +60,24 @@
     .blacklist {
         border: 1px solid #E4033B;
         color: #E4033B;
+
+        &:hover {
+            background-color: #E4033B;
+            color: #fff; 
+            cursor: pointer;
+
+        }
     }
     .activate {
         border: 1px solid #39CDCC;
         color: #39CDCC;
+
+        &:hover {
+            background-color: #39CDCC;
+            color: #fff; 
+            cursor: pointer;
+
+        }
     }
 
 }

@@ -11,6 +11,7 @@ import filter from '../../assets/filter-results-button.png';
 import rightArrow from '../../assets/np_next_2236826_000000 1.png';
 import leftArrow from '../../assets/np_next_2236826_000000 2 (1).png';
 import details from '../../assets/ic-more-vert-18px.png';
+import Spinner from '../../components/Spinner/Spinner';
 
 interface UserStat {
   icon: string;
@@ -37,7 +38,7 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleNameClick = (id: string) => {
-    navigate(`/user/${id}`); // Ensure the ID is passed as a route parameter
+    navigate(`/user/${id}`); 
   };
 
   useEffect(() => {
@@ -110,7 +111,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {isLoading ? (
-            <p>Loading data...</p>
+            <Spinner />
           ) : (
             <table className={classes.userTable}>
               <thead>
