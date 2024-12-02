@@ -12,6 +12,7 @@ import rightArrow from '../../assets/np_next_2236826_000000 1.png';
 import leftArrow from '../../assets/np_next_2236826_000000 2 (1).png';
 import details from '../../assets/ic-more-vert-18px.png';
 import Spinner from '../../components/Spinner/Spinner';
+import DetailModal from '../../components/Modal/DetailModal';
 
 interface UserStat {
   icon: string;
@@ -35,10 +36,23 @@ const Dashboard: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  const [selectedUser, setSelectedUser] = useState<User | null>(null); // Store the clicked user
+  const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | null>(null); // Store modal position
+
   const navigate = useNavigate();
 
   const handleNameClick = (id: string) => {
     navigate(`/user/${id}`); 
+  };
+  const handleDetailsClick = (user: User, event: React.MouseEvent<HTMLImageElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect(); // Get the position of the clicked image
+    setModalPosition({ top: rect.top + window.scrollY, left: rect.left + rect.width + 10 });
+    setSelectedUser(user); // Set the clicked user to show in the modal
+  };
+
+  const closeModal = () => {
+    setSelectedUser(null);
+    setModalPosition(null);
   };
 
   useEffect(() => {
@@ -142,7 +156,11 @@ const Dashboard: React.FC = () => {
                     <td className={classes.statusField}>
                       <span className={getStatusClass(user.status)}>{user.status}</span>
                       <span>
-                        <img src={details} alt="Details" />
+                        <img
+                          src={details}
+                          alt="Details"
+                          onClick={(event) => handleDetailsClick(user, event)}
+                        />
                       </span>
                     </td>
                   </tr>
@@ -177,6 +195,20 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </div>
+      {/* Modal */}
+      {selectedUser && modalPosition && (
+        <div
+          className={classes.DetailModal}
+          style={{
+            position: 'absolute',
+            top: modalPosition.top,
+            left: modalPosition.left,
+          }}
+          onClick={closeModal} // Close on click
+        >
+          <DetailModal user={selectedUser} onClose={closeModal} />
+        </div>
+      )} 
     </div>
   );
 };
