@@ -16,22 +16,28 @@ const DetailModal: React.FC<DetailModalProps> = ({ user, onClose }) => {
   if (!user) return null; // Don't render if no user is selected
 
   return (
-    <div className={classes.DetailModalContainer} onClick={onClose}>
-          <div>
-            <img src={view} alt="View" />
-            <p>View Details</p>
-          </div>
-          <div>
-            <img src={blacklist} alt="Blacklist" />
-            <p>Blacklist User</p>
-          </div>
-          <div>
-            <img src={activate} alt="Activate" />
-            <p>Activate User</p>
-          </div>
-          
+    <div
+      className={classes.DetailModalContainer}
+      onClick={(e) => e.stopPropagation()} // Prevent closing on modal click
+    >
+      <button className={classes.closeButton} onClick={onClose}>
+        &times; {/* A cross icon for the close button */}
+      </button>
+      <div>
+        <img src={view} alt="View" />
+        <p>View Details</p>
+      </div>
+      <div>
+        <img src={blacklist} alt="Blacklist" />
+        <p>Blacklist User</p>
+      </div>
+      <div>
+        <img src={activate} alt="Activate" />
+        <p>Activate User</p>
+      </div>
     </div>
   );
+  
 };
 
 export default DetailModal;

@@ -36,24 +36,32 @@ const Dashboard: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const [selectedUser, setSelectedUser] = useState<User | null>(null); // Store the clicked user
-  const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | null>(null); // Store modal position
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);  
+  const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | null>(null);  
 
   const navigate = useNavigate();
 
   const handleNameClick = (id: string) => {
     navigate(`/user/${id}`); 
   };
-  const handleDetailsClick = (user: User, event: React.MouseEvent<HTMLImageElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect(); // Get the position of the clicked image
-    setModalPosition({ top: rect.top + window.scrollY, left: rect.left + rect.width + 10 });
-    setSelectedUser(user); // Set the clicked user to show in the modal
-  };
 
-  const closeModal = () => {
-    setSelectedUser(null);
-    setModalPosition(null);
-  };
+  const handleDetailsClick = (event: React.MouseEvent, user: User) => {  
+  const iconRect = (event.target as HTMLElement).getBoundingClientRect();  
+  const modalLeft = iconRect.left - 200; // Adjust `200` to account for modal width  
+  const modalTop = iconRect.top + window.scrollY;  
+
+    setSelectedUser(user);  
+    setModalPosition({  
+      top: modalTop,  
+      left: modalLeft < 0 ? 0 : modalLeft, // Prevent modal from leaving screen on the left  
+    });  
+  };  
+
+  const handleCloseModal = () => {  
+    setSelectedUser(null);  
+    setModalPosition(null);  
+  };  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -156,11 +164,12 @@ const Dashboard: React.FC = () => {
                     <td className={classes.statusField}>
                       <span className={getStatusClass(user.status)}>{user.status}</span>
                       <span>
-                        <img
-                          src={details}
-                          alt="Details"
-                          onClick={(event) => handleDetailsClick(user, event)}
-                        />
+                        <img  
+                          src={details}  
+                          alt="Details"  
+                          onClick={(event) => handleDetailsClick(event, user)}  
+                          style={{ cursor: 'pointer' }}  
+                        />  
                       </span>
                     </td>
                   </tr>
@@ -196,19 +205,19 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
       {/* Modal */}
-      {selectedUser && modalPosition && (
-        <div
-          className={classes.DetailModal}
-          style={{
-            position: 'absolute',
-            top: modalPosition.top,
-            left: modalPosition.left,
-          }}
-          onClick={closeModal} // Close on click
-        >
-          <DetailModal user={selectedUser} onClose={closeModal} />
-        </div>
-      )} 
+      {selectedUser && modalPosition && (  
+          <div  
+            className={classes.modal}  
+            style={{  
+              position: 'absolute',  
+              top: modalPosition.top,  
+              left: modalPosition.left,  
+            }}  
+          >  
+            <DetailModal user={selectedUser} onClose={handleCloseModal} />  
+          </div>  
+        )}  
+
     </div>
   );
 };
