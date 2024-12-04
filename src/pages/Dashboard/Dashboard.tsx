@@ -152,10 +152,7 @@ const Dashboard: React.FC = () => {
                 {currentPageData.map((user) => (
                   <tr key={user.id}>
                     <td>{user.organization}</td>
-                    <td
-                      style={{ cursor: 'pointer', color: 'blue' }}
-                      onClick={() => handleNameClick(user.id)}
-                    >
+                    <td>
                       {user.username}
                     </td>
                     <td>{user.email}</td>
@@ -214,7 +211,7 @@ const Dashboard: React.FC = () => {
               left: modalPosition.left,  
             }}  
           >  
-            <DetailModal user={selectedUser} onClose={handleCloseModal} />  
+            <DetailModal user={selectedUser} onClose={handleCloseModal} onViewDetails={() => navigate(`/user/${selectedUser?.id}`)} />  
           </div>  
         )}  
 

@@ -21,8 +21,16 @@
     div {
         display: flex;
         gap: 15px;
-        
+        cursor: pointer;
         background-color: #fff;
+        padding: 10px;
+
+        &:hover {
+            background-color: rgba($green-color, 0.1);
+            color: $blue-color; 
+           
+            
+        }
        
 
     }
@@ -31,6 +39,7 @@
         height: 16px;
         width: 16px;
     }
+
 }
 
 .closeButton {
