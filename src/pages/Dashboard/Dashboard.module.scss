@@ -17,6 +17,10 @@
     flex-direction: column;
     gap: 20px;
 
+    @media (max-width: 768px) {
+        width: 100%;
+      }
+
 
     h1 {
         font-weight: 500;
@@ -24,11 +28,38 @@
         font-size: 24px;
     }
 }
-
 .userBoxContainer {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; // Optional: Adds spacing between boxes
+  overflow-x: auto; // Enables horizontal scrolling
+  padding-bottom: 10px; // Optional: Adds space for scrollbar if visible
+  scroll-snap-type: x mandatory; // Enables smooth snapping for child elements
+
+  &::-webkit-scrollbar {
+    height: 6px; // Customize scrollbar height
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); // Customize scrollbar color
+    border-radius: 5px;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: flex-start; // Aligns items to the start on smaller screens
+  }
+
+  .userBox {
+    flex: 0 0 auto; // Prevents boxes from shrinking and sets fixed width
+    scroll-snap-align: start; // Enables smooth snapping per box
+  }
 }
+
+
+// .userBoxContainer {
+//     display: flex;
+//     justify-content: space-between;
+// }
 
 .userBox {
     height: 160px;
@@ -195,4 +226,19 @@
   }  
 
 
+  .middleHidden {
+    @media (max-width: 768px) {
+      display: none; // Hides the `td` cells
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .userTable th:nth-child(1), 
+    .userTable th:nth-child(3),// Adjust the index to match the columns you want to hide
+    .userTable th:nth-child(4),
+    .userTable th:nth-child(5) {
+      display: none; // Hides the corresponding `th` headers
+    }
+  }
+  
   

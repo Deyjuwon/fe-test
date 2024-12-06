@@ -151,13 +151,14 @@ const Dashboard: React.FC = () => {
               <tbody>
                 {currentPageData.map((user) => (
                   <tr key={user.id}>
-                    <td>{user.organization}</td>
+                    <td className={classes.middleHidden}>{user.organization}</td>
                     <td>
                       {user.username}
                     </td>
-                    <td>{user.email}</td>
-                    <td>{user.phoneNumber}</td>
-                    <td>{user.dateJoined}</td>
+                    
+                    <td className={classes.middleHidden}>{user.email}</td>
+                    <td className={classes.middleHidden}>{user.phoneNumber}</td>
+                    <td className={classes.middleHidden}>{user.dateJoined}</td>
                     <td className={classes.statusField}>
                       <span className={getStatusClass(user.status)}>{user.status}</span>
                       <span>
