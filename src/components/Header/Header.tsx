@@ -5,6 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import bell from '../../assets/np_notification_2425223_000000 1.png';
 import profile from '../../assets/avatar.png';
 import dropdown from '../../assets/np_dropdown_615120_000000 1.png';
+import { GiHamburgerMenu } from "react-icons/gi";
 const Header = () => {
   return (
     <header className={classes.header}>
@@ -15,7 +16,7 @@ const Header = () => {
         <div className={classes.headerInput}>
             <input placeholder='Search for anything' type="text" />
             <span>
-                <CiSearch size={20} color='white' />
+                <CiSearch size={15} color='white' />
             </span>
         </div>
       </div>
@@ -31,6 +32,9 @@ const Header = () => {
         </div>
         
 
+      </div>
+      <div className={classes.menu}>
+        <GiHamburgerMenu size={20} />
       </div>
     </header>
   )
