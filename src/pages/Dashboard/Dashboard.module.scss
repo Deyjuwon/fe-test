@@ -31,9 +31,9 @@
 .userBoxContainer {
   display: flex;
   justify-content: space-between;
-  gap: 10px; // Optional: Adds spacing between boxes
+  gap: 10px; 
   overflow-x: auto; // Enables horizontal scrolling
-  padding-bottom: 10px; // Optional: Adds space for scrollbar if visible
+  padding-bottom: 10px; // Adds space for scrollbar if visible
   scroll-snap-type: x mandatory; // Enables smooth snapping for child elements
 
   &::-webkit-scrollbar {
@@ -55,11 +55,6 @@
   }
 }
 
-
-// .userBoxContainer {
-//     display: flex;
-//     justify-content: space-between;
-// }
 
 .userBox {
     height: 160px;
@@ -130,7 +125,7 @@
   
   
   .filterIcon {
-    width: 12px; // Adjust size as needed
+    width: 12px; 
     height: 12px;
     cursor: pointer;
   }
