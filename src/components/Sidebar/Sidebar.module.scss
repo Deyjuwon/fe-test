@@ -51,3 +51,9 @@ aside {
     font-weight: 500;
     padding-left: 30px;
 }
+
+.active {
+    background-color: rgba($green-color, 0.1);
+        color: $blue-color; 
+        border-left: 2px solid $green-color;
+}
